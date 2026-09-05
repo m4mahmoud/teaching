@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>منصة التعليم الإلكتروني - لوحة الطالب</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+			rel="stylesheet" />
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<!-- Header Section -->
+		<header>
+			<div class="logo">🎓 منصتي التعليمية</div>
+			<div class="nav-btns">
+				<button id="auth-btn" class="btn-primary">
+					تسجيل الدخول / حساب جديد
+				</button>
+				<button id="profile-btn" class="btn-secondary hidden">
+					الملف الشخصي
+				</button>
+			</div>
+		</header>
+
+		<!-- Main Content Area -->
+		<main>
+			<!-- Hero Landing View -->
+			<section id="hero-landing" class="hero-section">
+				<h1>اكتشف آلاف الكورسات وابدأ رحلة التعلم اليوم</h1>
+				<p>
+					منصة تعليمية متكاملة تربط الطلاب بأفضل المعلمين والخبراء في مختلف
+					المجالات لتطوير مهاراتك.
+				</p>
+				<button
+					onclick="document.getElementById('auth-btn').click()"
+					class="btn-primary"
+					style="padding: 0.75rem 2rem; font-size: 1.05rem">
+					ابدأ الآن مجاناً 🚀
+				</button>
+			</section>
+
+			<!-- Dynamic Dashboard Container -->
+			<section id="dashboard" class="hidden">
+				<!-- Student View (لوحة تحكم الطالب المطورة) -->
+
+				<div id="student-courses-list"></div>
+				<div class="dashboard-header"></div>
+
+				<!-- Modal عرض الحصص والدروس (تصميم عصري متطور) -->
+				<div
+					id="lessons-modal"
+					class="hidden"
+					style="
+						position: fixed;
+						inset: 0;
+						z-index: 1000;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						padding: 1rem;
+					">
+					<!-- الخلفية المعتمة مع تأثير التغويش -->
+					<div
+						id="lessons-modal-overlay"
+						style="
+							position: absolute;
+							inset: 0;
+							background: rgba(15, 23, 42, 0.6);
+							backdrop-filter: blur(6px);
+						"></div>
+
+					<!-- صندوق المحتوى الرئيسي للنافذة -->
+					<div
+						style="
+							position: relative;
+							background: #ffffff;
+							width: 100%;
+							max-width: 850px;
+							max-height: 85vh;
+							border-radius: 20px;
+							display: flex;
+							flex-direction: column;
+							overflow: hidden;
+							z-index: 1001;
+							box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+							border: 1px solid rgba(255, 255, 255, 0.1);
+						">
+						<!-- رأس الـ Modal -->
+						<div
+							style="
+								padding: 1.25rem 1.75rem;
+								background: linear-gradient(to right, #f8fafc, #f1f5f9);
+								border-bottom: 1px solid #e2e8f0;
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+							">
+							<div style="display: flex; align-items: center; gap: 0.75rem">
+								<div
+									style="
+										background: #2563eb;
+										color: white;
+										width: 38px;
+										height: 38px;
+										border-radius: 12px;
+										display: flex;
+										align-items: center;
+										justify-content: center;
+										font-size: 1.1rem;
+										box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+									">
+									🎓
+								</div>
+								<div>
+									<h3
+										id="modal-course-title"
+										style="
+											margin: 0;
+											font-size: 1.15rem;
+											color: #0f172a;
+											font-weight: 700;
+										">
+										عنوان الكورس
+									</h3>
+									<span
+										style="font-size: 0.75rem; color: #64748b; font-weight: 500"
+										>محتوى الحصص والدروس التعليمية</span
+									>
+								</div>
+							</div>
+							<button
+								id="close-lessons-modal-btn"
+								style="
+									background: #e2e8f0;
+									border: none;
+									width: 36px;
+									height: 36px;
+									border-radius: 50%;
+									display: flex;
+									align-items: center;
+									justify-content: center;
+									font-size: 1.2rem;
+									cursor: pointer;
+									color: #334155;
+									transition: all 0.2s;
+								"
+								onmouseover="
+									this.style.background = '#cbd5e1';
+									this.style.transform = 'scale(1.05)';
+								"
+								onmouseout="
+									this.style.background = '#e2e8f0';
+									this.style.transform = 'scale(1)';
+								">
+								&times;
+							</button>
+						</div>
+
+						<!-- محتوى الـ Modal الداخلي -->
+						<div
+							style="
+								padding: 1.75rem;
+								overflow-y: auto;
+								flex: 1;
+								background: #f8fafc;
+							">
+							<!-- نموذج إضافة حصة للمعلم (مخفي تلقائياً للطالب) -->
+							<div
+								id="add-lesson-form-wrapper"
+								style="
+									margin-bottom: 1.5rem;
+									background: #ffffff;
+									border: 1px solid #e2e8f0;
+									padding: 1.25rem;
+									border-radius: 14px;
+									box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+								">
+								<!-- محتوى فورم إضافة حصة -->
+							</div>
+
+							<!-- عداد وحالة الحصص -->
+							<div
+								style="
+									display: flex;
+									justify-content: space-between;
+									align-items: center;
+									margin-bottom: 1.25rem;
+									background: #ffffff;
+									padding: 0.75rem 1.25rem;
+									border-radius: 12px;
+									border: 1px solid #e2e8f0;
+								">
+								<div
+									style="
+										font-size: 0.9rem;
+										color: #334155;
+										font-weight: 600;
+										display: flex;
+										align-items: center;
+										gap: 0.5rem;
+									">
+									<span>📺</span> قائمة الدروس المسجلة
+								</div>
+								<div
+									style="
+										font-size: 0.85rem;
+										color: #2563eb;
+										background: #eff6ff;
+										padding: 0.3rem 0.85rem;
+										border-radius: 20px;
+										font-weight: 600;
+										border: 1px solid #dbeafe;
+									">
+									إجمالي الحصص: <span id="lessons-count">0</span>
+								</div>
+							</div>
+
+							<!-- قائمة الحصص والفيديوهات -->
+							<div id="lessons-list">
+								<!-- سيتم حقن الحصص هنا تلقائياً -->
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--
+				
+				
+				
+				
+				
+				
+				
+				
+				Teacher View 
+				 
+				
+				
+				
+				
+				
+				
+				
+				-->
+				<div id="teacher-view" class="hidden">
+					<div class="dashboard-header">
+						<div>
+							<h2>لوحة تحكم المعلم 👨‍🏫</h2>
+							<p class="subtitle">
+								قم بإضافة كورساتك ومتابعة محتواها بعد اعتمادها من الأدمن.
+							</p>
+						</div>
+						<button id="add-course-btn" class="btn-primary">
+							+ إضافة كورس جديد
+						</button>
+					</div>
+
+					<h3 style="font-size: 1.2rem; margin-bottom: 1rem">
+						كورساتي التعليمية
+					</h3>
+					<div id="teacher-courses-list" class="courses-grid"></div>
+					<!-- نافذة إدارة وإضافة حصص الكورس -->
+					<div
+						id="lessons-modal"
+						class="modal hidden"
+						style="
+							position: fixed;
+							inset: 0;
+							background: rgba(0, 0, 0, 0.5);
+							display: flex;
+							align-items: center;
+							justifycontent: center;
+							z-index: 1000;
+						">
+						<div
+							class="modal-content"
+							style="
+								background: white;
+								padding: 2rem;
+								border-radius: 12px;
+								width: 100%;
+								max-width: 600px;
+								max-height: 90vh;
+								overflow-y: auto;
+								position: relative;
+							">
+							<button
+								id="close-lessons-modal-btn"
+								style="
+									position: absolute;
+									top: 1rem;
+									left: 1rem;
+									background: none;
+									border: none;
+									font-size: 1.5rem;
+									cursor: pointer;
+								">
+								&times;
+							</button>
+
+							<h2
+								id="modal-course-title"
+								style="margin-bottom: 1.5rem; font-size: 1.25rem">
+								إدارة حصص الكورس
+							</h2>
+
+							<!-- نموذج إضافة حصة جديدة -->
+							<div
+								style="
+									background: #f8fafc;
+									padding: 1rem;
+									border-radius: 8px;
+									margin-bottom: 1.5rem;
+									border: 1px solid #e2e8f0;
+								">
+								<h3 style="font-size: 1rem; margin-bottom: 0.75rem">
+									➕ إضافة حصة جديدة
+								</h3>
+								<form
+									id="add-lesson-form"
+									style="display: flex; flex-direction: column; gap: 0.75rem">
+									<input
+										type="text"
+										id="lesson-title"
+										placeholder="عنوان الحصة (مثلاً: الدرس الأول - المقدمة)"
+										required
+										style="
+											padding: 0.75rem;
+											border: 1px solid #cbd5e1;
+											border-radius: 6px;
+											outline: none;
+										" />
+									<input
+										type="text"
+										id="lesson-video-url"
+										placeholder="رابط فيديو يوتيوب أو منصة العرض"
+										required
+										style="
+											padding: 0.75rem;
+											border: 1px solid #cbd5e1;
+											border-radius: 6px;
+											outline: none;
+										" />
+									<button
+										type="submit"
+										class="btn-primary"
+										style="
+											padding: 0.65rem;
+											cursor: pointer;
+											border: none;
+											border-radius: 6px;
+											background: #2563eb;
+											color: white;
+											font-weight: bold;
+										">
+										حفظ وإضافة الحصة 🚀
+									</button>
+								</form>
+							</div>
+
+							<!-- قائمة الحصص الحالية -->
+							<div>
+								<h3 style="font-size: 1rem; margin-bottom: 0.75rem">
+									📋 الحصص المضافة (<span id="lessons-count">0</span>)
+								</h3>
+								<div
+									id="lessons-list"
+									style="display: flex; flex-direction: column; gap: 0.5rem">
+									<!-- سيتم تعبئة الحصص هنا تلقائياً -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 
+				
+				
+				                                        Admin View 
+				
+				
+				
+				
+				
+				
+				-->
+				<div id="admin-view" class="hidden">
+					<div class="dashboard-header">
+						<div>
+							<h2>لوحة تحكم المشرف (الأدمن) ⚙️</h2>
+							<p class="subtitle">
+								إدارة المستخدمين، متابعة الإحصائيات، واعتماد الكورسات الجديدة.
+							</p>
+						</div>
+					</div>
+
+					<!-- Admin Stats -->
+					<div class="stats-grid">
+						<div class="stat-card">
+							<h3 id="stat-users-count">0</h3>
+							<p>إجمالي المستخدمين</p>
+						</div>
+						<div class="stat-card">
+							<h3 id="stat-students-count">0</h3>
+							<p>عدد الطلاب</p>
+						</div>
+						<div class="stat-card">
+							<h3 id="stat-teachers-count">0</h3>
+							<p>عدد المعلمين</p>
+						</div>
+						<div class="stat-card">
+							<h3 id="stat-courses-count">0</h3>
+							<p>إجمالي الكورسات</p>
+						</div>
+					</div>
+
+					<!-- Global Announcement -->
+					<div
+						style="
+							background: white;
+							padding: 1.75rem;
+							border-radius: var(--radius-md);
+							border: 1px solid var(--border-color);
+							margin-bottom: 2.5rem;
+							box-shadow: var(--shadow-sm);
+						">
+						<h3 style="font-size: 1.1rem; margin-bottom: 1rem">
+							📢 نشر إعلان عام لجميع المستخدمين
+						</h3>
+						<div style="display: flex; gap: 1rem">
+							<input
+								type="text"
+								id="global-announcement-input"
+								placeholder="اكتب نص الإعلان هنا..."
+								style="
+									flex: 1;
+									padding: 0.75rem 1rem;
+									border: 1px solid var(--border-color);
+									border-radius: var(--radius-sm);
+									outline: none;
+								" />
+							<button
+								onclick="window.sendGlobalAnnouncement()"
+								class="btn-primary">
+								نشر الإعلان
+							</button>
+						</div>
+					</div>
+
+					<!--                                 
+					
+					
+					
+					                       Users Table                   
+										   
+										 
+										 
+										   -->
+					<h3 style="font-size: 1.2rem; margin-bottom: 1rem">
+						إدارة المستخدمين
+					</h3>
+					<div
+						style="
+							background: white;
+							border-radius: var(--radius-md);
+							border: 1px solid var(--border-color);
+							overflow-x: auto;
+							margin-bottom: 2.5rem;
+						">
+						<table
+							style="width: 100%; border-collapse: collapse; text-align: right">
+							<thead>
+								<tr style="background: #f8fafc; color: #475569">
+									<th style="padding: 1rem">الاسم</th>
+									<th style="padding: 1rem">البريد الإلكتروني</th>
+									<th style="padding: 1rem">الدور الحالي</th>
+									<th style="padding: 1rem">تغيير الدور</th>
+									<th style="padding: 1rem">الإجراءات</th>
+								</tr>
+							</thead>
+							<tbody id="admin-users-list">
+								<tr>
+									<td
+										colspan="5"
+										style="
+											text-align: center;
+											padding: 1.5rem;
+											color: var(--text-muted);
+										">
+										جاري التحميل...
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<!-- Enrollment Requests Table -->
+						<h3
+							style="font-size: 1.2rem; margin-bottom: 1rem; margin-top: 2rem">
+							طلبات اشتراكات الكورسات المعلقة 📝
+						</h3>
+						<div
+							style="
+								background: white;
+								border-radius: var(--radius-md);
+								border: 1px solid var(--border-color);
+								overflow-x: auto;
+								margin-bottom: 2.5rem;
+							">
+							<table
+								style="
+									width: 100%;
+									border-collapse: collapse;
+									text-align: right;
+								">
+								<thead>
+									<tr style="background: #f8fafc; color: #475569">
+										<th style="padding: 1rem">الطالب</th>
+										<th style="padding: 1rem">الكورس المطلوب</th>
+										<th style="padding: 1rem">الحالة</th>
+										<th style="padding: 1rem">الإجراءات</th>
+									</tr>
+								</thead>
+								<tbody id="admin-enrollments-list">
+									<tr>
+										<td
+											colspan="4"
+											style="
+												text-align: center;
+												padding: 1.5rem;
+												color: var(--text-muted);
+											">
+											جاري التحميل...
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<!-- Courses Approval Table -->
+					<h3 style="font-size: 1.2rem; margin-bottom: 1rem">
+						إدارة ومراجعة الكورسات
+					</h3>
+					<div
+						style="
+							background: white;
+							border-radius: var(--radius-md);
+							border: 1px solid var(--border-color);
+							overflow-x: auto;
+							margin-bottom: 2.5rem;
+						">
+						<table
+							style="width: 100%; border-collapse: collapse; text-align: right">
+							<thead>
+								<tr style="background: #f8fafc; color: #475569">
+									<th style="padding: 1rem">عنوان الكورس</th>
+									<th style="padding: 1rem">المعلم</th>
+									<th style="padding: 1rem">السعر</th>
+									<th style="padding: 1rem">الحالة</th>
+									<th style="padding: 1rem">الإجراءات</th>
+								</tr>
+							</thead>
+							<tbody id="admin-courses-list">
+								<tr>
+									<td
+										colspan="5"
+										style="
+											text-align: center;
+											padding: 1.5rem;
+											color: var(--text-muted);
+										">
+										جاري التحميل...
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Modals -->
+		<!-- Student Lesson Viewer Modal (مشاهدة الدروس ومتابعة التقدم للطالب) -->
+		<div id="student-course-modal" class="modal hidden">
+			<div id="student-modal-overlay" class="modal-overlay"></div>
+			<div class="modal-content modal-large">
+				<button id="close-student-modal-btn" class="close-btn">&times;</button>
+				<h2 id="student-modal-title" style="margin-bottom: 1rem">
+					عنوان الكورس
+				</h2>
+				<div
+					id="student-lessons-container"
+					style="display: flex; flex-direction: column; gap: 1rem"></div>
+			</div>
+		</div>
+
+		<!-- 
+		
+		
+		
+		                                           Auth Modal (Login / Register) 
+												   
+												 
+												 
+												 
+												 
+												   -->
+		<div id="auth-modal" class="modal hidden">
+			<div id="modal-overlay" class="modal-overlay"></div>
+			<div class="modal-content">
+				<button id="close-modal-btn" class="close-btn">&times;</button>
+				<h2 id="modal-title" style="margin-bottom: 0.5rem">تسجيل الدخول</h2>
+				<p
+					id="modal-subtitle"
+					style="
+						color: var(--text-muted);
+						margin-bottom: 1.5rem;
+						font-size: 0.95rem;
+					">
+					أدخل البريد الإلكتروني وكلمة المرور للمتابعة
+				</p>
+
+				<form id="auth-form">
+					<div id="name-group" class="form-group hidden">
+						<label for="auth-name">الاسم الكامل</label>
+						<input type="text" id="auth-name" placeholder="أدخل اسمك الكامل" />
+					</div>
+					<div class="form-group">
+						<label for="auth-email">البريد الإلكتروني</label>
+						<input
+							type="email"
+							id="auth-email"
+							required
+							placeholder="example@domain.com" />
+					</div>
+					<div class="form-group">
+						<label for="auth-password">كلمة المرور</label>
+						<input
+							type="password"
+							id="auth-password"
+							required
+							placeholder="••••••••" />
+					</div>
+					<div id="role-group" class="form-group hidden">
+						<label>نوع الحساب:</label>
+						<div class="radio-group">
+							<label
+								><input type="radio" name="userRole" value="student" checked />
+								طالب</label
+							>
+							<label
+								><input type="radio" name="userRole" value="teacher" />
+								معلم</label
+							>
+							<label
+								><input type="radio" name="userRole" value="parent" /> ولي
+								أمر</label
+							>
+						</div>
+					</div>
+					<button
+						type="submit"
+						id="auth-submit-btn"
+						class="btn-primary full-width-btn"
+						style="margin-top: 1rem">
+						تسجيل الدخول
+					</button>
+				</form>
+				<div style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem">
+					<span id="toggle-text">ليس لديك حساب؟</span>
+					<a
+						href="#"
+						id="toggle-auth-btn"
+						style="
+							color: var(--primary-color);
+							font-weight: 700;
+							text-decoration: none;
+							margin-right: 0.35rem;
+						"
+						>إنشاء حساب جديد</a
+					>
+				</div>
+			</div>
+		</div>
+
+		<!--                              
+		
+		
+		
+		Profile Modal                                           
+		
+		
+		
+		-->
+		<div id="profile-modal" class="modal hidden">
+			<div id="profile-modal-overlay" class="modal-overlay"></div>
+			<div class="modal-content" style="max-width: 400px">
+				<button id="close-profile-btn" class="close-btn">&times;</button>
+				<h2 style="margin-bottom: 1.25rem">الملف الشخصي</h2>
+				<div
+					style="
+						background: #f8fafc;
+						padding: 1.25rem;
+						border-radius: var(--radius-sm);
+						border: 1px solid var(--border-color);
+						margin-bottom: 1.5rem;
+					">
+					<p style="margin-bottom: 0.5rem">
+						<strong>الاسم:</strong> <span id="profile-name">-</span>
+					</p>
+					<p style="margin-bottom: 0.5rem">
+						<strong>البريد الإلكتروني:</strong>
+						<span id="profile-email">-</span>
+					</p>
+					<p><strong>نوع الحساب:</strong> <span id="profile-role">-</span></p>
+				</div>
+				<button id="logout-btn" class="btn-danger full-width-btn">
+					تسجيل الخروج
+				</button>
+			</div>
+		</div>
+
+		<!--                  
+		
+		
+		Add Course Modal (Teacher) 
+		
+		
+		
+		
+		-->
+		<div id="add-course-modal" class="modal hidden">
+			<div id="add-course-overlay" class="modal-overlay"></div>
+			<div class="modal-content">
+				<button id="close-course-modal-btn" class="close-btn">&times;</button>
+				<h2 style="margin-bottom: 1.25rem">إضافة كورس جديد</h2>
+				<form id="add-course-form">
+					<div class="form-group">
+						<label for="course-title">عنوان الكورس</label>
+						<input
+							type="text"
+							id="course-title"
+							required
+							placeholder="مثال: أساسيات البرمجة بلغة جافاسكربت" />
+					</div>
+					<div class="form-group">
+						<label for="course-price">سعر الكورس (ج.م)</label>
+						<input type="number" id="course-price" required placeholder="0" />
+					</div>
+					<div class="form-group">
+						<label for="course-image">رابط صورة الكورس (اختياري)</label>
+						<input
+							type="url"
+							id="course-image"
+							placeholder="https://example.com/image.jpg" />
+					</div>
+					<div class="form-group">
+						<label for="course-description">وصف الكورس</label>
+						<textarea
+							id="course-description"
+							rows="3"
+							placeholder="أدخل وصفاً مختصراً للكورس..."></textarea>
+					</div>
+					<button
+						type="submit"
+						class="btn-primary full-width-btn"
+						style="margin-top: 0.5rem">
+						تقديم الكورس للمراجعة
+					</button>
+				</form>
+			</div>
+		</div>
+
+		<!-- Script helper for tabs switching (يمكنك نقلها أو دمجها بملف app.js) -->
+		<script>
+			function switchStudentTab(tabName) {
+				const exploreSec = document.getElementById("student-explore-section");
+				const enrolledSec = document.getElementById("student-enrolled-section");
+				const tabExploreBtn = document.getElementById("tab-explore");
+				const tabEnrolledBtn = document.getElementById("tab-enrolled");
+
+				if (tabName === "explore") {
+					exploreSec.classList.remove("hidden");
+					enrolledSec.classList.add("hidden");
+					tabExploreBtn.classList.add("active");
+					tabEnrolledBtn.classList.remove("active");
+				} else {
+					exploreSec.classList.add("hidden");
+					enrolledSec.classList.remove("hidden");
+					tabExploreBtn.classList.remove("active");
+					tabEnrolledBtn.classList.add("active");
+				}
+			}
+
+			// مستمع عام للضغط على زر فتح الحصص (لتجنب مشاكل تكسير النصوص في onclick)
+			document.addEventListener("click", (e) => {
+				const btn = e.target.closest(".open-lessons-btn");
+				if (btn) {
+					const courseId = btn.getAttribute("data-course-id");
+					const courseTitle = btn.getAttribute("data-course-title");
+					if (courseId) {
+						window.openStudentLessonsModal(courseId, courseTitle);
+					}
+				}
+			});
+		</script>
+		<!-- Include App JS -->
+		<script type="module" src="app.js"></script>
+	</body>
+</html>
