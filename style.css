@@ -1,0 +1,1646 @@
+/* ==========================================================================
+   منصتي التعليمية — Design System
+   لوحة الألوان: كحلي (ثقة وتركيز) × ذهبي محروق (إنجاز وتميّز) × خلفية ورقية دافئة
+   ========================================================================== */
+
+:root {
+	/* الألوان الأساسية */
+	--ink: #16233f; /* كحلي غامق - العناوين والنصوص الأساسية */
+	--ink-soft: #2a3b5c; /* كحلي أفتح - نصوص ثانوية داكنة */
+	--paper: #f7f5f0; /* خلفية ورقية دافئة */
+	--paper-alt: #efeae0; /* خلفية ورقية أغمق قليلاً */
+	--surface: #ffffff; /* سطح البطاقات */
+	--line: #e4decf; /* حدود دافئة */
+	--text-main: #16233f;
+	--text-muted: #6b6456; /* رمادي دافئ للنصوص الثانوية */
+	--text-faint: #9c9484;
+
+	/* الألوان التفاعلية */
+	--gold: #b4863a; /* الذهبي - العنصر التفاعلي الأساسي */
+	--gold-dark: #8e6926;
+	--gold-tint: #f3e8d0;
+	--sage: #3f7857; /* أخضر مكتوم - نجاح/قبول */
+	--sage-dark: #2f6247;
+	--sage-tint: #e3f0e7;
+	--amber: #a66a1e; /* عنبري محروق - قيد المراجعة */
+	--amber-tint: #f6e9d7;
+	--rust: #b54a3a; /* أحمر طوبي - رفض/حذف */
+	--rust-dark: #96392b;
+	--rust-tint: #f6e4e0;
+
+	/* القياسات */
+	--radius-sm: 8px;
+	--radius-md: 14px;
+	--radius-lg: 20px;
+	--shadow-sm: 0 1px 3px rgba(22, 35, 63, 0.06);
+	--shadow-md: 0 8px 24px rgba(22, 35, 63, 0.09);
+	--shadow-lg: 0 20px 48px rgba(22, 35, 63, 0.14);
+	--font-stack: "Cairo", sans-serif;
+	--max-width: 1180px;
+}
+
+/* ==========================================================================
+   إعادة الضبط والأساسيات
+   ========================================================================== */
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: var(--font-stack);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: var(--paper);
+	color: var(--text-main);
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	line-height: 1.65;
+}
+
+main {
+	flex: 1;
+	width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	color: var(--ink);
+	font-weight: 800;
+	line-height: 1.25;
+}
+
+p {
+	color: var(--text-muted);
+}
+
+a {
+	color: var(--gold-dark);
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
+
+::selection {
+	background: var(--gold-tint);
+	color: var(--ink);
+}
+
+:focus-visible {
+	outline: 3px solid var(--gold);
+	outline-offset: 2px;
+	border-radius: 4px;
+}
+
+.hidden {
+	display: none !important;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.container {
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 0 1.5rem;
+}
+
+/* ==========================================================================
+   الهيدر
+   ========================================================================== */
+
+header {
+	background: var(--ink);
+	padding: 1rem 1.75rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: sticky;
+	top: 0;
+	z-index: 500;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo {
+	font-size: 1.3rem;
+	font-weight: 800;
+	color: #ffffff;
+	letter-spacing: -0.02em;
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+
+.nav-btns {
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+}
+
+/* ==========================================================================
+   الأزرار
+   ========================================================================== */
+
+.btn-primary,
+.btn-secondary,
+.btn-danger,
+.btn-success,
+.btn-warning,
+.btn-info {
+	font-family: var(--font-stack);
+	font-weight: 700;
+	font-size: 0.95rem;
+	border: none;
+	border-radius: var(--radius-sm);
+	padding: 0.7rem 1.4rem;
+	cursor: pointer;
+	transition:
+		transform 0.15s ease,
+		box-shadow 0.15s ease,
+		background-color 0.15s ease;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.4rem;
+}
+
+.btn-primary {
+	background: var(--gold);
+	color: #ffffff;
+	box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover {
+	background: var(--gold-dark);
+	transform: translateY(-1px);
+	box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+	background: transparent;
+	color: var(--ink);
+	border: 1.5px solid var(--line);
+}
+header .btn-secondary {
+	color: #ffffff;
+	border-color: rgba(255, 255, 255, 0.35);
+}
+.btn-secondary:hover {
+	border-color: var(--gold);
+	color: var(--gold-dark);
+}
+header .btn-secondary:hover {
+	color: #ffffff;
+	border-color: #ffffff;
+}
+
+.btn-danger {
+	background: var(--rust);
+	color: #ffffff;
+}
+.btn-danger:hover {
+	background: var(--rust-dark);
+}
+
+.btn-success {
+	background: var(--sage);
+	color: #ffffff;
+}
+.btn-success:hover {
+	background: var(--sage-dark);
+}
+
+.btn-warning {
+	background: var(--amber-tint);
+	color: var(--amber);
+}
+.btn-warning:hover {
+	background: #eeddc0;
+}
+
+.btn-info {
+	background: var(--paper-alt);
+	color: var(--ink-soft);
+}
+.btn-info:hover {
+	background: var(--line);
+}
+
+.btn-sm {
+	padding: 0.4rem 0.85rem;
+	font-size: 0.8rem;
+	border-radius: 6px;
+	margin: 0.15rem;
+}
+
+.full-width-btn {
+	width: 100%;
+	justify-content: center;
+}
+
+button:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	transform: none !important;
+}
+
+/* ==========================================================================
+   قسم الهيرو (الصفحة الرئيسية)
+   ========================================================================== */
+
+.hero-section {
+	position: relative;
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 5rem 1.75rem 6rem;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	text-align: right;
+	background-image: repeating-linear-gradient(
+		to bottom,
+		transparent,
+		transparent 2.6rem,
+		var(--line) 2.6rem,
+		var(--line) calc(2.6rem + 1px)
+	);
+	background-position: 0 9rem;
+}
+
+.hero-section::before {
+	content: "منصتي التعليمية";
+	position: absolute;
+	top: 1.5rem;
+	left: 1.75rem;
+	writing-mode: vertical-rl;
+	font-size: 0.75rem;
+	font-weight: 700;
+	color: var(--line);
+	letter-spacing: 0.15em;
+}
+
+.hero-section h1 {
+	font-size: clamp(2.1rem, 4.5vw, 3.4rem);
+	max-width: 15ch;
+	position: relative;
+	z-index: 1;
+}
+
+.hero-section p {
+	max-width: 46ch;
+	font-size: 1.1rem;
+	margin-top: 1.25rem;
+	position: relative;
+	z-index: 1;
+}
+
+.hero-section button {
+	margin-top: 2rem;
+	position: relative;
+	z-index: 1;
+}
+
+/* ==========================================================================
+   كيف تعمل المنصة
+   ========================================================================== */
+
+.how-it-works {
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 1rem 1.75rem 5rem;
+}
+
+.how-it-works h2 {
+	font-size: 1.6rem;
+	margin-bottom: 2.25rem;
+}
+
+.steps-row {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1.5rem;
+	position: relative;
+}
+
+.step-card {
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	padding: 1.75rem 1.5rem;
+	position: relative;
+}
+
+.step-number {
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 50%;
+	background: var(--ink);
+	color: var(--gold-tint);
+	font-weight: 800;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1rem;
+	font-size: 1.05rem;
+}
+
+.step-card h3 {
+	font-size: 1.05rem;
+	margin-bottom: 0.5rem;
+}
+
+.step-card p {
+	font-size: 0.92rem;
+	margin: 0;
+}
+
+/* ==========================================================================
+   قسم الداشبورد العام
+   ========================================================================== */
+
+#dashboard {
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 2.5rem 1.75rem 4rem;
+}
+
+.dashboard-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin-bottom: 2rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid var(--line);
+}
+
+.dashboard-header h2 {
+	font-size: 1.5rem;
+	margin-bottom: 0.35rem;
+}
+
+.subtitle {
+	color: var(--text-muted);
+	font-size: 0.95rem;
+}
+
+/* بطاقات الإحصائيات */
+
+.stats-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: 1.25rem;
+	margin-bottom: 2.5rem;
+}
+
+.stat-card {
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	padding: 1.5rem;
+	text-align: center;
+	border-top: 3px solid var(--gold);
+}
+
+.stat-card h3 {
+	font-size: 2rem;
+	color: var(--ink);
+}
+
+.stat-card p {
+	font-size: 0.85rem;
+	margin-top: 0.35rem;
+}
+
+/* ==========================================================================
+   بطاقات الكورسات
+   ========================================================================== */
+
+.courses-grid,
+#student-courses-list,
+#my-enrolled-courses-grid,
+#teacher-courses-list {
+	display: grid;
+	grid-template-rows: repeat(auto-fill, minmax(290px, 1fr));
+	gap: 1.25rem;
+	margin-top: 0.5rem;
+}
+
+.course-card,
+.course-card-modern {
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-md);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	box-shadow: var(--shadow-sm);
+	transition:
+		transform 0.15s ease,
+		box-shadow 0.15s ease;
+	border-right: 4px solid var(--gold);
+}
+
+.course-card:hover,
+.course-card-modern:hover {
+	transform: translateY(-3px);
+	box-shadow: var(--shadow-md);
+}
+
+.course-header-banner {
+	background: var(--ink);
+	padding: 1rem 1.25rem;
+	position: relative;
+}
+
+.banner-top-bar {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding-left: 5.5rem;
+}
+
+.course-category-badge {
+	font-size: 0.75rem;
+	font-weight: 700;
+	color: var(--gold-tint);
+}
+
+.banner-price-tag {
+	position: absolute;
+	top: -0.1rem;
+	left: 1.25rem;
+	background: var(--gold);
+	color: #ffffff;
+	font-weight: 800;
+	font-size: 1.1rem;
+	padding: 0.5rem 0.9rem;
+	border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+	box-shadow: var(--shadow-sm);
+}
+
+.banner-price-tag small {
+	font-weight: 600;
+	font-size: 0.65rem;
+}
+
+.course-content {
+	padding: 1.25rem;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.course-title {
+	font-size: 1.1rem;
+	color: var(--ink);
+}
+
+.course-description {
+	font-size: 0.88rem;
+	color: var(--text-muted);
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.course-stats-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.75rem;
+	margin-top: 0.5rem;
+	padding-top: 0.75rem;
+	border-top: 1px dashed var(--line);
+}
+
+.stat-item {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.stat-icon {
+	font-size: 1.1rem;
+}
+
+.stat-info {
+	display: flex;
+	flex-direction: column;
+}
+
+.stat-label {
+	font-size: 0.68rem;
+	color: var(--text-faint);
+}
+
+.stat-value {
+	font-size: 0.82rem;
+	font-weight: 700;
+	color: var(--ink-soft);
+}
+
+.course-card-actions {
+	padding: 1rem 1.25rem;
+	border-top: 1px solid var(--paper-alt);
+	background: var(--paper);
+}
+
+.btn-manage-content {
+	width: 100%;
+	background: var(--ink);
+	color: #ffffff;
+	border: none;
+	padding: 0.65rem;
+	border-radius: var(--radius-sm);
+	font-weight: 700;
+	cursor: pointer;
+	transition: background 0.15s ease;
+}
+.btn-manage-content:hover {
+	background: var(--ink-soft);
+}
+
+/* شارات الحالة */
+
+.badge,
+.badge-approved,
+.badge-pending,
+.badge-rejected,
+.badge-status,
+.badge-featured {
+	display: inline-block;
+	font-size: 0.75rem;
+	font-weight: 700;
+	padding: 0.3rem 0.7rem;
+	border-radius: 999px;
+}
+
+.badge {
+	background: var(--paper-alt);
+	color: var(--ink-soft);
+}
+
+.badge-approved,
+.status-approved {
+	background: var(--sage-tint) !important;
+	color: var(--sage-dark) !important;
+}
+
+.badge-pending,
+.status-pending {
+	background: var(--amber-tint) !important;
+	color: var(--amber) !important;
+}
+
+.badge-rejected,
+.status-rejected {
+	background: var(--rust-tint) !important;
+	color: var(--rust-dark) !important;
+}
+
+.badge-featured {
+	background: var(--gold-tint) !important;
+	color: var(--gold-dark) !important;
+}
+
+/* ==========================================================================
+   الدروس والحصص
+   ========================================================================== */
+
+.lesson-card {
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: var(--radius-sm);
+	padding: 1rem;
+	margin-bottom: 1rem;
+}
+
+.lesson-card-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 0.75rem;
+}
+
+.lesson-title {
+	font-weight: 700;
+	color: var(--ink);
+}
+
+.video-responsive-wrapper {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+	border-radius: 8px;
+	background: var(--ink);
+}
+.video-responsive-wrapper iframe {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+/* ==========================================================================
+   النماذج (Forms)
+   ========================================================================== */
+
+.form-group {
+	margin-bottom: 1.1rem;
+	text-align: right;
+}
+
+.form-group label {
+	display: block;
+	font-size: 0.88rem;
+	font-weight: 700;
+	color: var(--ink-soft);
+	margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea {
+	width: 100%;
+	padding: 0.75rem 0.9rem;
+	border: 1.5px solid var(--line);
+	border-radius: var(--radius-sm);
+	font-size: 0.95rem;
+	background: var(--paper);
+	color: var(--text-main);
+	transition:
+		border-color 0.15s ease,
+		background 0.15s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus,
+input:focus,
+textarea:focus {
+	outline: none;
+	border-color: var(--gold);
+	background: var(--surface);
+}
+
+.radio-group {
+	display: flex;
+	gap: 1rem;
+}
+
+.radio-group label {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: var(--ink-soft);
+	cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+	accent-color: var(--gold);
+	width: auto;
+}
+
+/* ==========================================================================
+   النوافذ المنبثقة (Modals)
+   ========================================================================== */
+
+.modal {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1rem;
+}
+
+.modal-overlay {
+	position: absolute;
+	inset: 0;
+	background: rgba(22, 35, 63, 0.55);
+	backdrop-filter: blur(3px);
+}
+
+.modal-content {
+	position: relative;
+	background: var(--surface);
+	width: 100%;
+	max-width: 460px;
+	max-height: 88vh;
+	overflow-y: auto;
+	border-radius: var(--radius-md);
+	padding: 2rem;
+	box-shadow: var(--shadow-lg);
+	z-index: 1;
+}
+
+.modal-large {
+	max-width: 620px;
+}
+
+.close-btn {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	width: 2.1rem;
+	height: 2.1rem;
+	border-radius: 50%;
+	border: none;
+	background: var(--paper-alt);
+	color: var(--ink-soft);
+	font-size: 1.25rem;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.15s ease;
+}
+.close-btn:hover {
+	background: var(--line);
+}
+
+.modal-content h2,
+.modal-content h3 {
+	margin-bottom: 0.4rem;
+}
+
+/* ==========================================================================
+   جداول الأدمن
+   ========================================================================== */
+
+#admin-view table {
+	font-size: 0.9rem;
+}
+
+#admin-view thead tr th {
+	color: var(--ink-soft) !important;
+	font-weight: 700;
+	background: var(--paper) !important;
+	border-bottom: 2px solid var(--line);
+}
+
+#admin-view tbody tr {
+	border-bottom: 1px solid var(--paper-alt);
+	transition: background 0.1s ease;
+}
+
+#admin-view tbody tr:hover {
+	background: var(--paper);
+}
+
+#admin-view select {
+	padding: 0.4rem 0.6rem;
+	border-radius: 6px;
+	border: 1.5px solid var(--line);
+	background: var(--surface);
+	font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   الاستجابة للشاشات الصغيرة
+   ========================================================================== */
+
+@media (max-width: 768px) {
+	header {
+		padding: 0.85rem 1.1rem;
+	}
+	.nav-btns {
+		gap: 0.5rem;
+	}
+	.nav-btns .btn-primary,
+	.nav-btns .btn-secondary {
+		padding: 0.55rem 0.9rem;
+		font-size: 0.85rem;
+	}
+	.hero-section {
+		padding: 3rem 1.25rem 3.5rem;
+		text-align: right;
+		align-items: flex-start;
+	}
+	.hero-section::before {
+		display: none;
+	}
+	.steps-row {
+		grid-template-columns: 1fr;
+	}
+	#dashboard {
+		padding: 1.75rem 1.1rem 3rem;
+	}
+	.dashboard-header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.courses-grid,
+	#student-courses-list,
+	#my-enrolled-courses-grid,
+	#teacher-courses-list {
+		grid-template-columns: 1fr;
+	}
+	.modal-content {
+		padding: 1.5rem;
+	}
+	table {
+		font-size: 0.8rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		transition-duration: 0.001ms !important;
+	}
+}
+
+.back a {
+	position: fixed;
+	bottom: 20px;
+	left: 100px;
+	z-index: 10000000;
+	background-color: #b4863a;
+	color: #ffffff;
+	padding: 10px;
+	border-radius: 10px;
+	text-decoration: none;
+	font-size: 20px;
+	box-shadow: inset;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+footer {
+	background-color: var(--ink);
+	color: var(--gold-tint);
+	padding: 80px 0 35px;
+	border-top: 4px solid var(--gold);
+}
+
+.footer-grid {
+	display: grid;
+	grid-template-columns: 2fr 1fr 1fr 1.3fr;
+	gap: 45px;
+	margin-bottom: 55px;
+}
+
+.footer-bottom {
+	padding-top: 28px;
+	border-top: 1px solid var(--ink-soft);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 18px;
+	color: var(--text-faint);
+	font-size: 0.92rem;
+}
+
+@media (max-width: 991px) {
+	.back a {
+		font-size: 16px;
+		padding: 8px;
+		left: 10px;
+		bottom: 50px;
+	}
+
+	.footer-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+
+/* ==========================================================================
+   LOGIN PAGE — هوية بصرية موحدة مع الصفحة الرئيسية
+   ========================================================================== */
+.login-page {
+	background-color: var(--paper);
+	background-image: radial-gradient(var(--line) 0.85px, transparent 0.85px);
+	background-size: 28px 28px;
+	color: var(--text-main);
+}
+
+.login-page header.login-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: var(--header-height);
+	background-color: rgba(247, 245, 240, 0.88);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	border-bottom: 1px solid var(--line);
+	z-index: 1000;
+	padding: 0;
+	transition: all 0.35s ease;
+}
+
+.login-page header.login-header .logo {
+	color: inherit;
+	font-size: inherit;
+	letter-spacing: normal;
+	gap: 12px;
+	text-decoration: none;
+}
+
+.login-page header.login-header .btn-primary,
+.login-page header.login-header .btn-dark,
+.login-page header.login-header .btn-outline {
+	font-family: var(--font-stack);
+	font-weight: 800;
+	border-radius: var(--radius-sm);
+	text-decoration: none;
+}
+
+.login-page .login-header-actions {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.login-page .login-home-btn {
+	border: 1px solid var(--line);
+	background: var(--surface);
+	color: var(--ink);
+}
+
+.login-page .login-home-btn:hover {
+	border-color: var(--gold);
+	color: var(--gold-dark);
+}
+
+.login-page main {
+	padding-top: var(--header-height);
+}
+
+.login-page .login-hero {
+	min-height: 56vh;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding-top: 5rem;
+	padding-bottom: 4rem;
+	background-image: radial-gradient(circle at 20% 20%, rgba(180,134,58,.08), transparent 30%),
+		radial-gradient(circle at 80% 70%, rgba(63,120,87,.07), transparent 30%),
+		repeating-linear-gradient(to bottom, transparent, transparent 2.6rem, var(--line) 2.6rem, var(--line) calc(2.6rem + 1px));
+	border-bottom: 1px solid var(--line);
+}
+
+.login-page .login-hero h1 {
+	max-width: 850px;
+	font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.login-page .login-hero p {
+	max-width: 720px;
+	margin-inline: auto;
+	font-size: 1.05rem;
+}
+
+.login-page .login-hero button {
+	box-shadow: var(--shadow-gold);
+}
+
+.login-page .how-it-works {
+	padding-top: 4rem;
+}
+
+.login-page .modal-content {
+	border: 1px solid var(--line);
+	box-shadow: var(--shadow-lg);
+	border-radius: var(--radius-lg);
+	background: var(--surface);
+}
+
+.login-page .modal-content input {
+	border-color: var(--line);
+	background: var(--paper);
+	color: var(--ink);
+}
+
+.login-page .modal-content input:focus {
+	border-color: var(--gold);
+	box-shadow: 0 0 0 3px var(--gold-tint);
+}
+
+.login-page .full-width-btn {
+	background: var(--gold);
+	box-shadow: var(--shadow-gold);
+}
+
+.login-page .full-width-btn:hover {
+	background: var(--gold-dark);
+}
+
+.login-page .back a {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 16px;
+	border: 1px solid var(--line);
+	border-radius: var(--radius-sm);
+	background: var(--surface);
+	color: var(--ink);
+	font-weight: 800;
+	text-decoration: none;
+	box-shadow: var(--shadow-sm);
+}
+
+.login-page .back a:hover {
+	border-color: var(--gold);
+	color: var(--gold-dark);
+}
+
+@media (max-width: 768px) {
+	.login-page header.login-header {
+		height: 72px;
+	}
+
+	.login-page main {
+		padding-top: 72px;
+	}
+
+	.login-page .logo-title {
+		font-size: 1.05rem;
+	}
+
+	.login-page .logo-subtitle {
+		font-size: 0.62rem;
+	}
+
+	.login-page .logo-icon {
+		width: 40px;
+		height: 40px;
+		font-size: 1.1rem;
+	}
+
+	.login-page .login-home-btn {
+		display: none;
+	}
+
+	.login-page .login-header-actions .btn-primary,
+	.login-page .login-header-actions .btn-dark {
+		padding: 0.55rem 0.85rem;
+		font-size: 0.82rem;
+	}
+}
+
+/* ==========================================================================
+   NOTIFICATIONS — رسائل مستخدم احترافية بدل alert التقليدي
+   ========================================================================== */
+.notification-container {
+	position: fixed;
+	top: 88px;
+	right: 24px;
+	z-index: 5000;
+	width: min(390px, calc(100vw - 32px));
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	pointer-events: none;
+}
+
+.notification {
+	position: relative;
+	display: grid;
+	grid-template-columns: 44px 1fr 30px;
+	align-items: start;
+	gap: 12px;
+	direction: rtl;
+	padding: 15px 14px 18px;
+	border: 1px solid var(--line);
+	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.97);
+	box-shadow: 0 18px 45px rgba(22, 35, 63, 0.16);
+	backdrop-filter: blur(14px);
+	-webkit-backdrop-filter: blur(14px);
+	opacity: 0;
+	transform: translateX(24px) scale(.98);
+	transition: opacity .28s ease, transform .28s ease;
+	overflow: hidden;
+	pointer-events: auto;
+}
+
+.notification.show {
+	opacity: 1;
+	transform: translateX(0) scale(1);
+}
+
+.notification.hide {
+	opacity: 0;
+	transform: translateX(24px) scale(.98);
+}
+
+.notification-icon {
+	width: 44px;
+	height: 44px;
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.15rem;
+}
+
+.notification-body {
+	min-width: 0;
+	padding-top: 1px;
+}
+
+.notification-body strong {
+	display: block;
+	color: var(--ink);
+	font-size: .94rem;
+	font-weight: 900;
+	margin-bottom: 2px;
+}
+
+.notification-body p {
+	margin: 0;
+	color: var(--text-muted);
+	font-size: .84rem;
+	line-height: 1.65;
+	word-break: break-word;
+}
+
+.notification-close {
+	width: 30px;
+	height: 30px;
+	border: 0;
+	border-radius: 8px;
+	background: transparent;
+	color: var(--text-faint);
+	cursor: pointer;
+	transition: .2s ease;
+}
+
+.notification-close:hover {
+	background: var(--paper);
+	color: var(--ink);
+}
+
+.notification-progress {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	height: 3px;
+	transform-origin: right;
+	animation: notificationProgress 4.5s linear forwards;
+}
+
+.notification-success .notification-icon { background: var(--sage-tint); color: var(--sage-dark); }
+.notification-success .notification-progress { background: var(--sage); }
+.notification-error .notification-icon { background: var(--rust-tint); color: var(--rust-dark); }
+.notification-error .notification-progress { background: var(--rust); }
+.notification-warning .notification-icon { background: var(--amber-tint); color: var(--amber); }
+.notification-warning .notification-progress { background: var(--amber); }
+.notification-info .notification-icon { background: var(--gold-tint); color: var(--gold-dark); }
+.notification-info .notification-progress { background: var(--gold); }
+
+@keyframes notificationProgress {
+	from { transform: scaleX(1); }
+	to { transform: scaleX(0); }
+}
+
+@media (max-width: 600px) {
+	.notification-container {
+		top: 82px;
+		right: 16px;
+		width: calc(100vw - 32px);
+	}
+
+	.notification {
+		grid-template-columns: 40px 1fr 28px;
+		gap: 10px;
+		padding: 13px 12px 16px;
+		border-radius: 14px;
+	}
+
+	.notification-icon {
+		width: 40px;
+		height: 40px;
+		border-radius: 10px;
+	}
+}
+
+/* ======================================================================
+   تأكيدات ورسائل النظام — UI موحد
+   ====================================================================== */
+.notification-success .notification-icon { background: var(--sage-tint); color: var(--sage-dark); }
+.notification-error .notification-icon { background: var(--rust-tint); color: var(--rust-dark); }
+.notification-warning .notification-icon { background: var(--amber-tint); color: var(--amber); }
+.notification-info .notification-icon { background: var(--gold-tint); color: var(--gold-dark); }
+
+.notification-close {
+	width: 30px;
+	height: 30px;
+	border: 0;
+	border-radius: 9px;
+	background: transparent;
+	color: var(--text-faint);
+	cursor: pointer;
+	transition: all .2s ease;
+}
+.notification-close:hover {
+	background: var(--paper-alt);
+	color: var(--ink);
+}
+.notification-progress {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 3px;
+	width: 100%;
+	background: var(--gold);
+	transform-origin: right;
+	animation: notificationProgress 4.5s linear forwards;
+}
+.notification-success .notification-progress { background: var(--sage); }
+.notification-error .notification-progress { background: var(--rust); }
+.notification-warning .notification-progress { background: var(--amber); }
+
+@keyframes notificationProgress {
+	from { transform: scaleX(1); }
+	to { transform: scaleX(0); }
+}
+
+.confirm-dialog {
+	position: fixed;
+	inset: 0;
+	z-index: 10000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 18px;
+	direction: rtl;
+	animation: confirmFadeIn .18s ease both;
+}
+.confirm-dialog.closing { animation: confirmFadeOut .18s ease both; }
+.confirm-dialog-overlay {
+	position: absolute;
+	inset: 0;
+	background: rgba(14, 23, 42, .62);
+	backdrop-filter: blur(5px);
+}
+.confirm-dialog-card {
+	position: relative;
+	z-index: 1;
+	width: min(440px, 100%);
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: 22px;
+	padding: 26px;
+	box-shadow: 0 28px 80px rgba(22,35,63,.24);
+	text-align: right;
+}
+.confirm-dialog-icon {
+	width: 54px;
+	height: 54px;
+	border-radius: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--gold-tint);
+	color: var(--gold-dark);
+	font-size: 1.35rem;
+	margin-bottom: 15px;
+}
+.confirm-dialog-body h3 {
+	margin-bottom: 7px;
+	font-size: 1.1rem;
+}
+.confirm-dialog-body p {
+	margin: 0;
+	font-size: .92rem;
+	line-height: 1.8;
+}
+.confirm-dialog-actions {
+	display: flex;
+	gap: 10px;
+	margin-top: 22px;
+}
+.confirm-dialog-actions .btn { flex: 1; }
+@keyframes confirmFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes confirmFadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+/* ======================================================================
+   مشغل الفيديو الاحترافي
+   ====================================================================== */
+.platform-video-viewer {
+	width: 100%;
+}
+.platform-video-topbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 12px;
+	color: var(--text-muted);
+	font-size: .84rem;
+	font-weight: 800;
+}
+.platform-video-topbar > span {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	color: var(--sage-dark);
+}
+.video-back-btn {
+	border: 0;
+	background: transparent;
+	color: var(--gold-dark);
+	font-family: var(--font-stack);
+	font-weight: 800;
+	cursor: pointer;
+	padding: 7px 0;
+}
+.video-back-btn:hover { color: var(--ink); }
+.platform-video-frame {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	background: #05070b;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 18px 45px rgba(0,0,0,.2);
+}
+.platform-video-frame #platform-youtube-player,
+.platform-video-frame iframe {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+.video-overlay-shield {
+	position: absolute;
+	inset: 0;
+	bottom: 72px;
+	z-index: 2;
+	pointer-events: none;
+}
+.platform-video-controls {
+	position: absolute;
+	z-index: 3;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	padding: 9px 12px 11px;
+	background: linear-gradient(transparent, rgba(0,0,0,.92));
+	color: #fff;
+}
+.video-progress-row {
+	display: grid;
+	grid-template-columns: 42px 1fr 42px;
+	align-items: center;
+	gap: 8px;
+	direction: ltr;
+	font-size: .72rem;
+}
+#video-progress {
+	width: 100%;
+	accent-color: var(--gold-light);
+	cursor: pointer;
+}
+.video-controls-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	direction: ltr;
+}
+.video-controls-right,
+.video-controls-left {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+}
+.video-control-btn {
+	width: 34px;
+	height: 34px;
+	border: 0;
+	border-radius: 9px;
+	background: rgba(255,255,255,.11);
+	color: #fff;
+	cursor: pointer;
+	transition: background .2s ease, transform .2s ease;
+}
+.video-control-btn:hover {
+	background: rgba(255,255,255,.22);
+	transform: translateY(-1px);
+}
+.video-select-wrap {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	color: rgba(255,255,255,.9);
+	font-size: .72rem;
+	font-weight: 800;
+}
+.video-select-wrap select {
+	border: 1px solid rgba(255,255,255,.18);
+	border-radius: 8px;
+	background: rgba(0,0,0,.55);
+	color: #fff;
+	padding: 6px 7px;
+	font-family: var(--font-stack);
+	font-size: .72rem;
+	outline: none;
+}
+.video-security-note {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	margin: 10px 2px 0;
+	font-size: .78rem;
+	color: var(--text-faint);
+}
+.video-security-note i { color: var(--sage); }
+
+.platform-video-frame:fullscreen {
+	width: 100vw;
+	height: 100vh;
+	aspect-ratio: auto;
+	border-radius: 0;
+}
+.platform-video-frame:fullscreen .platform-video-controls {
+	padding-bottom: 16px;
+}
+
+@media (max-width: 600px) {
+	.notification-container {
+		top: 78px;
+		right: 16px;
+		width: calc(100vw - 32px);
+	}
+	.notification { grid-template-columns: 40px 1fr 28px; gap: 9px; padding: 12px; }
+	.notification-icon { width: 40px; height: 40px; }
+	.confirm-dialog-card { padding: 21px; }
+	.confirm-dialog-actions { flex-direction: column-reverse; }
+	.platform-video-topbar { font-size: .76rem; }
+	.platform-video-frame { border-radius: 11px; }
+	.video-progress-row { grid-template-columns: 36px 1fr 36px; }
+	.video-controls-row { gap: 4px; }
+	.video-controls-left { gap: 4px; }
+	.video-select-wrap { font-size: .62rem; }
+	.video-select-wrap select { padding: 5px 4px; font-size: .65rem; max-width: 72px; }
+	.video-control-btn { width: 31px; height: 31px; }
+}
+
+/* ======================================================================
+   AUTH EXPERIENCE — واجهة دخول/تسجيل حديثة
+   ====================================================================== */
+.login-page .modal-content {
+    position: relative;
+    overflow: hidden;
+    padding: 34px;
+    border: 1px solid rgba(180, 134, 58, .18);
+    box-shadow: 0 30px 90px rgba(15, 23, 42, .22);
+}
+
+.login-page .modal-content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--gold-dark), var(--gold-light), var(--gold-dark));
+}
+
+.login-page #modal-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.55rem;
+    letter-spacing: -.3px;
+}
+
+.login-page #modal-title::before {
+    content: "\\f2bd";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: var(--gold-tint);
+    color: var(--gold-dark);
+    font-size: 1rem;
+}
+
+.password-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 7px;
+}
+
+.password-label-row label { margin-bottom: 0; }
+.password-hint {
+    color: var(--text-faint);
+    font-size: .72rem;
+    font-weight: 700;
+}
+
+.password-input-wrap { position: relative; }
+.password-input-wrap input { padding-left: 48px !important; }
+
+.password-toggle {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text-faint);
+    cursor: pointer;
+    transition: .2s ease;
+}
+.password-toggle:hover,
+.password-toggle:focus-visible {
+    color: var(--gold-dark);
+    background: var(--gold-tint);
+    outline: none;
+}
+
+.role-option {
+    flex: 1;
+    min-width: 120px;
+    padding: 12px 14px !important;
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: var(--paper);
+    transition: .2s ease;
+    cursor: pointer;
+}
+.role-option:hover {
+    border-color: rgba(180, 134, 58, .45);
+    transform: translateY(-1px);
+}
+.role-option span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+}
+.role-option input { accent-color: var(--gold-dark); }
+
+.teacher-admin-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(34, 197, 94, .06);
+    border: 1px solid rgba(34, 197, 94, .14);
+    color: var(--text-muted);
+    font-size: .77rem;
+    line-height: 1.65;
+}
+.teacher-admin-note i { color: #16803c; margin-top: 3px; }
+
+.login-page #auth-submit-btn {
+    min-height: 50px;
+    border-radius: 13px;
+    font-weight: 900;
+    letter-spacing: -.1px;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.login-page #auth-submit-btn:hover {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .login-page .modal-content { padding: 28px 20px; }
+    .login-page #modal-title { font-size: 1.3rem; }
+    .password-hint { display: none; }
+}
